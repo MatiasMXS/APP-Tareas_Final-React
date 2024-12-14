@@ -1,10 +1,14 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
-const tareas = import.meta.env.VITE_TAREAS;
 
-export const getTareas = () => {
+export const getTareas = async (url) => {
   try {
-    const respose = axios.get(`${baseURL}${tareas}`);
-  } catch (error) {}
+    const respose = await axios.get(url);
+    return respose.data;
+  } catch (error) {
+    console.error(error)
+  }
 };
+
+export default getTareas;
+
