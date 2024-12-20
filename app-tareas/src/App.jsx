@@ -5,9 +5,15 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import {Dashboard} from "./pages/Dashboard";
-import LoginPage from "./pages/login";
-import ButtonAppBar from "./Components/ButtonAppBar";
+import {Dashboard} from "./pages/Dashboard/Dashboard";
+import LoginPage from "./pages/login/login";
+import ButtonAppBar from "./Components/ButtonAppBar/ButtonAppBar";
+import { AddBookPage } from "./pages/Add/AddBookPage";
+
+export const baseURL = import.meta.env.VITE_BASE_URL;
+export const tareasURL = import.meta.env.VITE_TAREAS;
+export const completarURL = import.meta.env.VITE_COMPLETAR;
+
 
 function App() {
   const router = createBrowserRouter(
@@ -16,6 +22,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />,
         <Route element={<ButtonAppBar />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/add" element={<AddBookPage />} />
           </Route>
       </>
     )
