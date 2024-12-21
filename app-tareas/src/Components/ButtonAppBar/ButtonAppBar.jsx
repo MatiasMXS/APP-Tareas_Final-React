@@ -56,19 +56,19 @@ export default function ButtonAppBar({ children }) {
         {
           id: 4,
           titulo: "Alta",
-          path: "/reports/sales",
+          path: "/dashboard/prioridad/alta",
           icon: <DescriptionIcon />,
         },
         {
           id: 5,
           titulo: "Media",
-          path: "/reports/traffic",
+          path: "/dashboard/prioridad/media",
           icon: <DescriptionIcon />,
         },
         {
           id: 6,
           titulo: "Baja",
-          path: "/reports/traffic",
+          path: "/dashboard/prioridad/baja",
           icon: <DescriptionIcon />,
         },
         
