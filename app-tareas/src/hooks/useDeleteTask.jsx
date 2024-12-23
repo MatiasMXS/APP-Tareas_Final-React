@@ -1,31 +1,32 @@
-import { useState } from "react";
 import { deleteTask } from "../services/delteTask";
 import { useDispatch } from "react-redux";
 import { setTareas } from "../store/slices/TareasSlices/TareasSlices";
 import getTareas from "../services/getTareas";
 import { baseURL, tareasURL } from "../App";
+import { getTaskProriti } from "../services/getTaskPrioriti";
+import { useParams } from "react-router";
+import { getTaskEnd } from "../services/getTaskEnd";
+import useAlert from "./useAlert";
 
 export const useDeleteTask = () => {
+  const {handleAlertOpen} = useAlert();
   const dispatch = useDispatch();
-  const [TaskForm, setTaskForm] = useState({
-    _id: "",
-});
+  const { dia } = useParams(); 
 
-const handleUpdate = (e) => {
-    setTaskForm({
-      _id: e._id,
-    });
-  };
-
-  const handleDelete = async () => {
-    const sendData = await deleteTask(TaskForm._id);
+  const handleDelete = async (e) => {
+    const validacion = ["1", "2", "7"];
+    
+    const sendData = await deleteTask(e._id);
     const response = await getTareas(`${baseURL}${tareasURL}`);
     dispatch(setTareas(response));
-    console.log({ sendData });
+    dispatch(getTaskProriti({ prioriti: e.prioridad }));
+      if (dia !== undefined && validacion.includes(dia)) {
+        dispatch(getTaskEnd({ day: dia }));
+      } 
+      handleAlertOpen("Tarea Eliminada con Exito")
   };
 
   return {
-    handleUpdate,
     handleDelete,
   };
 };

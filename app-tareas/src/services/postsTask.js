@@ -1,19 +1,18 @@
 import axios from "axios";
 import { baseURL, tareasURL } from "../App";
 
-export const postTask = async (bookForm) => {
+export const postTask = async (taskForm) => {
   const response = await axios.post(
     `${baseURL}${tareasURL}`,
 
     {
-      titulo: bookForm.titulo,
-      fechaLimite: bookForm.fechaLimite,
-      prioridad: bookForm.prioridad,
-      materia: bookForm.materia,
-      descripcion: bookForm.descripcion,
+      titulo: taskForm.titulo,
+      fechaLimite: taskForm.fechaLimite,
+      prioridad: taskForm.prioridad,
+      materia: taskForm.materia,
+      descripcion: taskForm.descripcion,
+      etiquetas: taskForm.etiquetas,
     },
   );
-
-  console.log({ response });
   return response;
 };

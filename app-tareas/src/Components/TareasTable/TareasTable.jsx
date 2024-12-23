@@ -1,11 +1,7 @@
 /* eslint-disable react/prop-types */
 import {
   Box,
-  Button,
-  Checkbox,
-  Chip,
   Table,
-  TableBody,
   TableCell,
   TableContainer,
   TableHead,
@@ -13,35 +9,24 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import ModalP from "../Modalp/Modalp";
-import { useEffect, useState } from "react";
+import ModalEdit from "../ModalEdit/ModalEdit";
 import { ModalDelete } from "../ModalDelete/ModalDelete";
-import { useCompleteTask } from "../../hooks/useCompleteTask";
+import { useTaskTable } from "../../hooks/useTaskTable";
+import TareasTableCuerpo from "../TareasTableCuerpo/TareasTableCuerpo";
 
-export const TareasTable = ({ tareas }) => {
-  const { handleComplete } = useCompleteTask();
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [selectedRow, setSelectedRow] = useState({
-    _id: "",
-    titulo: "",
-    fechaLimite: null,
-    prioridad: "",
-    materia: "",
-    descripcion: "",
-  });
-  const handleEditClick = (rowData) => {
-    setSelectedRow(rowData);
-    setOpen1(true);
-  };
-
-  const handleDeleteClick = (rowData) => {
-    setSelectedRow(rowData);
-    setOpen2(true);
-  };
-
-
-
+export const TareasTable = ({ tareas, Titulo }) => {
+  const {
+    handleComplete,
+    openModalEdit,
+    openModalDelete,
+    expandedRow,
+    selectedRow,
+    handleEditClick,
+    handleDeleteClick,
+    HandleExpandedRow,
+    setOpenModalEdit,
+    setOpenModalDelete,
+  } = useTaskTable();
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -55,78 +40,42 @@ export const TareasTable = ({ tareas }) => {
         }}
       >
         <Typography id="modal-modal-title" variant="h3" component="h2">
-          Lista de tareas
+          {Titulo}
         </Typography>
         <TableContainer>
-          <Table>
-            <TableHead sx={{ backgroundColor: "lightblue" }}>
+          <Table color="primary">
+            <TableHead
+              sx={{ backgroundColor: (theme) => theme.palette.primary.main }}
+            >
               <TableRow>
                 <TableCell></TableCell>
-                <TableCell>Titulo</TableCell>
-                <TableCell>Fecha Limite</TableCell>
-                <TableCell>Prioridad</TableCell>
-                <TableCell>Etiquetas</TableCell>
-                <TableCell>Materia</TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
+                <TableCell sx={{ color: "white" }}>Titulo</TableCell>
+                <TableCell sx={{ color: "white" }}>Fecha Limite</TableCell>
+                <TableCell sx={{ color: "white" }}>Prioridad</TableCell>
+                <TableCell sx={{ color: "white" }}>Etiquetas</TableCell>
+                <TableCell sx={{ color: "white" }}>Materia</TableCell>
+                <TableCell sx={{ color: "white" }}>Editar</TableCell>
+                <TableCell sx={{ color: "white" }}>Borrar</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {tareas.map((tarea) => (
-                <TableRow key={tarea.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={tarea?.completada}
-                      onClick={() => handleComplete(tarea)}
-                    />
-                  </TableCell>
-                  <TableCell>{tarea.titulo}</TableCell>
-                  <TableCell>{tarea.fechaLimite}</TableCell>
-                  <TableCell>
-                    <Chip
-                      label={tarea?.prioridad}
-                      color={
-                        tarea?.prioridad === "alta"
-                          ? "error"
-                          : tarea?.prioridad === "media"
-                          ? "warning"
-                          : tarea?.prioridad === "baja"
-                          ? "secondary"
-                          : "default"
-                      }
-                      style={{ marginBottom: "10px" }}
-                    />
-                  </TableCell>
-                  <TableCell>{tarea.etiquetas}</TableCell>
-                  <TableCell>{tarea.materia}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEditClick(tarea)}
-                    >
-                      Editar
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDeleteClick(tarea)}
-                    >
-                      Borrar
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            <TareasTableCuerpo
+              tareas={tareas}
+              HandleExpandedRow={HandleExpandedRow}
+              expandedRow={expandedRow}
+              handleComplete={handleComplete}
+              handleEditClick={handleEditClick}
+              handleDeleteClick={handleDeleteClick}
+            />
           </Table>
         </TableContainer>
-        <ModalP open1={open1} setOpen1={setOpen1} selectedRow={selectedRow} />
+        <ModalEdit
+          openModalEdit={openModalEdit}
+          setOpenModalEdit={setOpenModalEdit}
+          selectedRow={selectedRow}
+        />
         <ModalDelete
-          open2={open2}
-          setOpen2={setOpen2}
+          openModalDelete={openModalDelete}
+          setOpenModalDelete={setOpenModalDelete}
           selectedRow={selectedRow}
         />
       </div>
@@ -135,4 +84,3 @@ export const TareasTable = ({ tareas }) => {
 };
 
 export default TareasTable;
-//open1={open} setOpen={setOpen} setProducts={setProducts}

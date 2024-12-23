@@ -15,10 +15,3 @@ const tareasSlice = createSlice({
 export const { setTareas} = tareasSlice.actions;
 export default tareasSlice.reducer;
 
-//get tareas
-//add tareas
-//check tareas
-//update tarea
-// delete tareas
-//prioridad
-// porxima a terminar

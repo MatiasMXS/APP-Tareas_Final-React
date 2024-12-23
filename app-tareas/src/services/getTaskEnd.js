@@ -1,15 +1,15 @@
 import axios from "axios";
-import { baseURL, prioridadURL, tareasURL } from "../App";
+import { baseURL, diaAVencerURL, tareasURL } from "../App";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const getTaskProriti = createAsyncThunk(
-  "TaskPririti/getTaskPririti",
+export const getTaskEnd = createAsyncThunk(
+  "EndDay/getTaskEnd",
   async (payload, thunkAPI) => {
     
     try {
-      const {prioriti} = payload;
-      const url = `${baseURL}${tareasURL}${prioridadURL}/${prioriti}`;
+      const {day} = payload;
+      const url = `${baseURL}${tareasURL}${diaAVencerURL}/${day}`;
       const response = await axios.get(url);
       return response.data;
     } catch (error) {

@@ -52,18 +52,29 @@ export const TaskFormComponent = ({TaskForm, handleChange, handleSubmit, handleC
                 onChange={(e) => handleChange(e)}
               />
             </Grid2>
+
             <Grid2 item xs={4}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DateTimePicker"]}>
-                  <DateTimePicker
-                    label="Fecha Limite"
-                    name="fechaLimite"
-                    value={dayjs(TaskForm.fechaLimite)}
-                    onChange={handleChangeDateTime}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </Grid2>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Materia"
+              name="materia"
+              value={TaskForm.materia}
+              onChange={(e) => handleChange(e)}
+            />
+          </Grid2>
+            
+          </Grid2>
+          <Grid2
+            item
+            xs={12}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "12px",
+              alignItems: "center",
+            }}
+          >
             <Grid2 item xs={4} sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Prioridad</InputLabel>
@@ -84,17 +95,30 @@ export const TaskFormComponent = ({TaskForm, handleChange, handleSubmit, handleC
                 </Select>
               </FormControl>
             </Grid2>
-          </Grid2>
-          <Grid2 item xs={3}>
+            <Grid2 item xs={4}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DateTimePicker"]}>
+                  <DateTimePicker
+                    label="Fecha Limite"
+                    name="fechaLimite"
+                    value={dayjs(TaskForm.fechaLimite)}
+                    onChange={handleChangeDateTime}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </Grid2>
+            <Grid2 item xs={3}>
             <TextField
               fullWidth
               variant="outlined"
-              label="Materia"
-              name="materia"
-              value={TaskForm.materia}
+              label="Etiqueta"
+              name="etiquetas"
+              value={TaskForm.etiquetas}
               onChange={(e) => handleChange(e)}
             />
           </Grid2>
+          </Grid2>
+          
           <Grid2 item xs={3}>
             <TextField
               fullWidth

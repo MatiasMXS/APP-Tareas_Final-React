@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box} from "@mui/material";
 import { TaskFormComponent } from "../../Components/TaskForm/TaskForm";
 import { useForm } from "../../hooks/useForm";
+import FuctionAlert from "../../Components/FunctionsAlert/FunctionAlert";
 
-export const AddBookPage = () => {
+export const AddTaskPage = () => {
   const {
     TaskForm,
     handleChange,
@@ -29,6 +30,7 @@ export const AddBookPage = () => {
         textButton1={"Agregar"}
         textButton2={"Limpiar"}
       />
+      <FuctionAlert />
     </Box>
   );
 };

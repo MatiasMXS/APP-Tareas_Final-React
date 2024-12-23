@@ -1,30 +1,27 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
 import TareasTable from "../../Components/TareasTable/TareasTable";
-
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getTaskProriti } from "../../services/getTaskPrioriti";
+import { getTaskEnd } from "../../services/getTaskEnd";
 import FuctionAlert from "../../Components/FunctionsAlert/FunctionAlert";
 
-export const Prioriti = () => {
-  const { prioridad } = useParams(); // Capturamos el parámetro dinámico
+export const TaskEnd = () => {
+  const { dia } = useParams(); // Capturamos el parámetro dinámico
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { taskPrioriti, isLoading, error } = useSelector(
-    (state) => state.taskPrioriti
-  );
+  const { endDay, isLoading, error } = useSelector((state) => state.endDay);
 
-  const validacion = ["alta", "media", "baja"];
+  const validacion = ["1", "2", "7"];
 
   useEffect(() => {
-    if (!validacion.includes(prioridad)) {
+    if (!validacion.includes(dia)) {
       navigate("/dashboard");
     } else {
-      dispatch(getTaskProriti({ prioriti: prioridad }));
+      dispatch(getTaskEnd({ day: dia }));
     }
-  }, [prioridad, dispatch, navigate]);
+  }, [dia, dispatch, navigate]);
 
   if (isLoading) {
     return (
@@ -36,15 +33,15 @@ export const Prioriti = () => {
   if (error) {
     return (
       <Typography variant="h5" sx={{ flexGrow: 1, p: 10, Color: "primary" }}>
-        No existen tareas con este Nibel de prioridad
+        No xisten tareas a vencer
       </Typography>
     );
   }
 
   return (
     <Box sx={{ alignContent: "center", margin: "0 auto", gap: "12px" }}>
-      <TareasTable tareas={taskPrioriti} Titulo={"Tareas por prioridad "} />
-      <FuctionAlert/>
+      <TareasTable tareas={endDay} Titulo={"Tareas a vencer"} />
+      <FuctionAlert />
     </Box>
   );
 };

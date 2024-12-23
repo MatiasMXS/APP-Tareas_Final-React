@@ -1,19 +1,14 @@
-import { Box, Button, Modal, Typography } from "@mui/material"
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { useDeleteTask } from "../../hooks/useDeleteTask";
-import { useEffect } from "react";
 
-export const ModalDelete = ({open2, setOpen2, selectedRow}) => {
-    const {handleUpdate, handleDelete} = useDeleteTask();
-    useEffect(() => {
-        handleUpdate(selectedRow)
-      }, [selectedRow]);
+export const ModalDelete = ({ openModalDelete, setOpenModalDelete, selectedRow }) => {
+  const { handleDelete } = useDeleteTask();
 
-
-    const handleClose = () => setOpen2(false);
-    const handleDeleteButton = () => {
-    handleDelete();
-    setOpen2(false);
-  }
+  const handleClose = () => setOpenModalDelete(false);
+  const handleDeleteButton = () => {
+    handleDelete(selectedRow);
+    setOpenModalDelete(false);
+  };
 
   const style = {
     position: "absolute",
@@ -26,21 +21,37 @@ export const ModalDelete = ({open2, setOpen2, selectedRow}) => {
     boxShadow: 24,
     p: 4,
   };
-    return ( <Modal
-        open={open2}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      > <Box sx={style}>
-       <Typography variant="h5" gutterBottom>
-              ¿Desae Eliminar esta tarea?
-            </Typography>
-      <Button variant="contained" color="primary"onClick={handleDeleteButton} >
-              si
-            </Button>
-            <Button variant="contained" color="secondary" onClick={handleClose}>
-              No
-            </Button>
-      
-    </Box>
-  </Modal>);
-}
+
+  return (
+    <Modal
+      open={openModalDelete}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Typography variant="h5" gutterBottom>
+          ¿Desea Eliminar esta tarea?
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: 2, // Espaciado entre los botones
+            marginTop: 2, // Espaciado superior
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleDeleteButton}
+          >
+            Sí
+          </Button>
+          <Button variant="contained" color="secondary" onClick={handleClose}>
+            No
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
+  );
+};

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { postTask } from "../services/postsTask";
+import useAlert from "./useAlert";
 
 export const useForm = () => {
+  const {handleAlertOpen} = useAlert();
   const [TaskForm, setTaskForm] = useState({
     titulo: "",
     fechaLimite: null,
     prioridad: "",
     materia: "",
     descripcion: "",
+    etiquetas: "",
   });
 
   const handleChange = (e) => {
@@ -15,7 +18,6 @@ export const useForm = () => {
   };
   const handleChangeDateTime = (newDateTime) => {
     const newDate= newDateTime.format("YYYY-MM-DD HH:mm:ss");
-    console.log(newDate);
     setTaskForm({...TaskForm, fechaLimite: newDate})
     
   };
@@ -23,13 +25,14 @@ export const useForm = () => {
 
   const handleSubmit = async () => {
     const sendData = await postTask(TaskForm);
-    console.log({ sendData });
+    handleAlertOpen("Tarea cargada con exito")
     setTaskForm({
       titulo: "",
       fechaLimite: null,
       prioridad: "",
       materia: "",
       descripcion: "",
+      etiquetas: "",
     });
   };
 
@@ -40,6 +43,7 @@ export const useForm = () => {
       prioridad: "",
       materia: "",
       descripcion: "",
+      etiquetas: "",
     });
   };
 

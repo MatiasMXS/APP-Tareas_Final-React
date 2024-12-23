@@ -11,7 +11,7 @@ export const AppBarMenu = ({ setOpen }) => {
         <Button variant="secondary" onClick={() => setOpen((prev) => !prev)}>
           <MenuIcon />
         </Button>
-        <Typography variant="h4" noWrap component="div">
+        <Typography variant="h4" noWrap component="div" sx={{ color: "white" }}>
           Planificador Personal
         </Typography>
       </Toolbar>

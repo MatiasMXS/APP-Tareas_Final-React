@@ -12,16 +12,22 @@ import { useEffect, useState } from "react";
 import { TaskFormComponent } from "../TaskForm/TaskForm";
 import { useFormEdit } from "../../hooks/useFormEdit";
 
-export const ModalP = ({ open1, setOpen1, selectedRow}) => {
-  const { TaskForm, handleChange, handleSubmit, handleChangeDateTime, handleUpdate } =
-    useFormEdit();
-  const handleClose = () => setOpen1(false);
-  const handleSave = () =>{handleSubmit();
-    setOpen1(false);
-  }
+export const ModalEdit = ({ openModalEdit, setOpenModalEdit, selectedRow }) => {
+  const {
+    TaskForm,
+    handleChange,
+    handleSubmit,
+    handleChangeDateTime,
+    handleUpdate,
+  } = useFormEdit();
+  const handleClose = () => setOpenModalEdit(false);
+  const handleSave = () => {
+    handleSubmit();
+    setOpenModalEdit(false);
+  };
 
   useEffect(() => {
-    handleUpdate(selectedRow)
+    handleUpdate(selectedRow);
   }, [selectedRow]);
 
   const style = {
@@ -37,10 +43,10 @@ export const ModalP = ({ open1, setOpen1, selectedRow}) => {
     boxShadow: 24,
     p: 4,
   };
-  
+
   return (
     <Modal
-      open={open1}
+      open={openModalEdit}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -61,4 +67,4 @@ export const ModalP = ({ open1, setOpen1, selectedRow}) => {
   );
 };
 
-export default ModalP;
+export default ModalEdit;

@@ -8,18 +8,18 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import StarIcon from "@mui/icons-material/Star";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LayersIcon from "@mui/icons-material/Layers";
+import { menuMockup } from "../../utils/MenuMockup";
+
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { AppBarMenu } from "../appBarMenu/AppBarMenu";
+
+import logo from "../../assets/logo.svg";
 
 export default function ButtonAppBar({ children }) {
   const [open, setOpen] = useState(false);
@@ -32,74 +32,6 @@ export default function ButtonAppBar({ children }) {
       [menuId]: !prevState[menuId],
     }));
   };
-
-  const menu = [
-    {
-      id: 1,
-      titulo: "Agregar tareas",
-      path: "/add",
-      icon: <DashboardIcon />,
-    },
-    {
-      id: 2,
-      titulo: "Listado tareas",
-      path: "/dashboard",
-      icon: <StarIcon />,
-    },
-    { kind: "divider" },
-    { kind: "header", title: "Filtrado" },
-    {
-      id: 3,
-      titulo: " Por Priorida",
-      icon: <BarChartIcon />,
-      children: [
-        {
-          id: 4,
-          titulo: "Alta",
-          path: "/dashboard/prioridad/alta",
-          icon: <DescriptionIcon />,
-        },
-        {
-          id: 5,
-          titulo: "Media",
-          path: "/dashboard/prioridad/media",
-          icon: <DescriptionIcon />,
-        },
-        {
-          id: 6,
-          titulo: "Baja",
-          path: "/dashboard/prioridad/baja",
-          icon: <DescriptionIcon />,
-        },
-        
-      ],
-    },
-    {
-      id: 7,
-      titulo: "Por vencer",
-      icon: <BarChartIcon />,
-      children: [
-        {
-          id: 8,
-          titulo: "Hoy",
-          path: "/reports/sales",
-          icon: <DescriptionIcon />,
-        },
-        {
-          id: 9,
-          titulo: "Mañana",
-          path: "/reports/traffic",
-          icon: <DescriptionIcon />,
-        },
-        {
-          id: 10,
-          titulo: "En la semana",
-          path: "/reports/traffic",
-          icon: <DescriptionIcon />,
-        },
-      ],
-    },
-  ];
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -114,9 +46,26 @@ export default function ButtonAppBar({ children }) {
       >
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
+          <Box
+            sx={{
+              display: "flex",
+              margin: "16px",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <img
+              src={logo}
+              alt="logo"
+              style={{ width: "65px", height: "65px" }}
+            ></img>
+            <Typography variant="h6" component="div">
+              Menu
+            </Typography>
+          </Box>
           <Divider />
           <List>
-            {menu.map((item) =>
+            {menuMockup.map((item) =>
               item.kind === "divider" ? (
                 <Divider key={`divider-${item.id}`} />
               ) : item.kind === "header" ? (
