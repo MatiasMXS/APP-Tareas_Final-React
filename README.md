@@ -5,15 +5,19 @@ Una app para organizarte con tus tarea, colocarles el grado de dificultad, coloc
 - Crear una nueva tarea
 - Actualizar una tarea por ID
 - Eliminar una tarea por ID
-- 
+  
 También hace uso de los Endpoints de negocio de:
 - Completar Tarea (marca como completadas las tareas y  las desmarca, en caso de que ya estaban como completadas)
 - Filtrado pro prioridad (filtra si son de prioridad alta, media o baja)
 - filtrado por vencimiento (filtra las tareas, por la fecha de vencimiento)
 
+______________________________________________
+
 Al ingresar a la app deberá usar:
   usuario: tarea
   contraseña: tarea
+
+______________________________________________
 
 El archivo .env esta compuesto por:
   VITE_BASE_URL = https://api-lista-de-tareas.vercel.app/api
@@ -25,8 +29,10 @@ El archivo .env esta compuesto por:
   VITE_PRIORIDAD = /prioridad
   
   VITE_A_VENCER = /proximas-vencer
+
+  ______________________________________________
   
-La estructura general del codigo es:
+La estructura general de las paginas del codigo es:
 
 App.jsx
 |
@@ -43,6 +49,9 @@ App.jsx
 
 |¬ /dashboard/dia-a-vencer/:dia TaskEnd.jsx
 
+______________________________________________
+
+La estructura general de los componentes de la aplicacion  es:
 
 PersistentDrawerLeft -> AppBar, MenuItemsAppBar, useAppBa
 
