@@ -36,7 +36,7 @@ export const Prioriti = () => {
   if (error) {
     return (
       <Typography variant="h5" sx={{ flexGrow: 1, p: 10, Color: "primary" }}>
-        No existen tareas con este Nibel de prioridad
+        No existen tareas con este Nivel de prioridad
       </Typography>
     );
   }
@@ -44,7 +44,7 @@ export const Prioriti = () => {
   return (
     <Box sx={{ alignContent: "center", margin: "0 auto", gap: "12px" }}>
       <TareasTable tareas={taskPrioriti} Titulo={"Tareas por prioridad "} />
-      <FuctionAlert/>
+      <FuctionAlert />
     </Box>
   );
 };
